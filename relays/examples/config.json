@@ -1,0 +1,24 @@
+{
+    "cycles" : {
+        "test" : {
+            "subCycles" : [{"mode" : true, "seconds" : 20}, {"mode" : false, "seconds" : 20}],
+            "numRelays" : [1,2]
+            },
+        "floracion" : {
+            "subCycles" : [{"mode" : true, "seconds" : 43200}, {"mode" : false, "seconds" : 43200}]
+            },
+        "crecimiento" : {
+            "subCycles" : [{"mode" : true, "seconds" : 64800}, {"mode" : false, "seconds" : 21600}]
+            },
+        "cambio" : {
+            "subCycles" : [{"mode" : true, "seconds" : 129600}, {"cycleName" : "floracion", "numRelays" : [1]}]
+            },
+        "powerOn" : {
+            "subCycles" : [{"mode" : true, "seconds" : null}]
+            },
+        "powerOff" : {
+            "subCycles" : [{"mode" : true, "seconds" : null}]
+            }
+    },
+    "numRelays" : [1,2,3]
+}
