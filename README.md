@@ -77,4 +77,6 @@ OPTIONS:
  - **run** {cycleName}: To run a cycle. The cycle name is in the configuration file *config.json*
 
 Example of use:
+
+
     sudo sh /etc/init.d/gpirelays.sh run test
