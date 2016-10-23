@@ -41,8 +41,11 @@ restart)
 run)
  run "$2"
  ;;
+info)
+ info "$2"
+ ;;
 *)
- echo $"Usar: $0 {start|stop|restart| run (cycle name)}"
+ echo $"Usar: $0 {start|stop|restart| [run|state] (cycle name)}"
  exit 1
 esac
  

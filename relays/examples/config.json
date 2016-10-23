@@ -17,7 +17,7 @@
             "subCycles" : [{"mode" : true, "seconds" : null}]
             },
         "powerOff" : {
-            "subCycles" : [{"mode" : true, "seconds" : null}]
+            "subCycles" : [{"mode" : false, "seconds" : null}]
             }
     },
     "numRelays" : [1,2,3]

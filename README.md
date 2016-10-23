@@ -39,8 +39,6 @@ The config file is a JSON array with 2 elements:
 
 Config file, example:
 
-    {
-	    ""
 
     {
         "cycles" : {
@@ -64,6 +62,19 @@ Config file, example:
                 "subCycles" : [{"mode" : true, "seconds" : null}]
                 }
         },
-        "numRelays" : [1,2,3]
+        "numRelays" : [1,2,3
     }
 
+Use
+----
+
+Once installed, execute as root:
+sh /etc/init.d/gpirelays.sh {option}
+OPTIONS:
+ - **start**: To start the daemon
+ - **stop**: To stop the daemon
+ - **restart**: To restart the daemon
+ - **run** {cycleName}: To run a cycle. The cycle name is in the configuration file *config.json*
+
+Example of use:
+    sudo sh /etc/init.d/gpirelays.sh run test

@@ -4,33 +4,40 @@ import time
 import json
 from datetime import datetime
 
+
 class Log:
     fileName = "/home/pi/.greenPi/relays/log.json"
     #fileName = os.environ['HOME'] + "/.greenPi/relays/log.json"
-    
+
     @staticmethod
-    def writeLog(key, cycleName, numRelays, mode, seconds = None):
+    def writeLog(key, cycleName, numRelays, mode, seconds=None):
         log = Log.getLog()
         strNumRelays = '%s' % ' '.join(map(str, numRelays))
-        mode = "on" if mode else "off"
-        dicc = {"date" : time.strftime('%b %d %Y %H:%M:%S'), "key" : key,  "cycleName" : cycleName, "numRelays" : strNumRelays, "mode" : mode}
-        if seconds != None and seconds > 0:
+        state = "on" if mode else "off"
+        dicc = {"date": time.strftime('%b %d %Y %H:%M:%S'),
+            "key": key, "cycleName": cycleName, "numRelays": strNumRelays,
+            "mode": state}
+        if seconds is not None and seconds > 0:
             dicc["lapsedSeconds"] = seconds
         log.append(dicc)
         with open(Log.fileName, 'w') as outfile:
             json.dump(log, outfile)
-    
+
     @staticmethod
     def getLog():
         try:
-            with open(Log.fileName, "r") as data_file:    
+            with open(Log.fileName, "r") as data_file:
                 return json.load(data_file)
         except:
-            f = open(Log.fileName, 'w')
-            f.write("[]")
-            f.close()
+            Log.resetLog()
             return []
-            
+
+    @staticmethod
+    def resetLog():
+        f = open(Log.fileName, 'w')
+        f.write("[]")
+        f.close()
+
     @staticmethod
     def getLastLog():
         log = Log.getLog()
@@ -38,7 +45,7 @@ class Log:
         if lenLog > 0:
             return log[lenLog - 1]
         return []
-    
+
     @staticmethod
     def readLastLog():
         lastLog = Log.getLastLog()
@@ -46,7 +53,7 @@ class Log:
             date = datetime.strptime(lastLog["date"], '%b %d %Y %H:%M:%S')
             seconds = (datetime.now() - date).total_seconds()
             seconds = int(round(seconds))
-            finalLog = {"lapsedSeconds" : seconds}
+            finalLog = {"lapsedSeconds": seconds}
             for item in lastLog:
                 if item == "date":
                     continue

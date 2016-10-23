@@ -2,29 +2,30 @@
 
 from time import sleep
 
+
 class Relays:
     configGpioNums = [17, 22, 23, 24]
-    gpioNumsStates = {17 : False, 22 : False, 23 : False, 24 : False}
-    
+    gpioNumsStates = {17: False, 22: False, 23: False, 24: False}
+
     @staticmethod
-    def switch(numRelays, mode, seconds = None):
+    def switch(numRelays, mode, seconds=None):
         gpioNums = Relays.getRealGpioNums(numRelays)
         Relays.switchByGpioNums(gpioNums, mode, seconds)
-    
+
     @staticmethod
-    def switchByGpioNums(gpioNums, mode, seconds = None):
+    def switchByGpioNums(gpioNums, mode, seconds=None):
         for index in gpioNums:
             Relays.gpioNumsStates[index] = bool(mode)
-        if not seconds == None:
+        if not seconds is None:
             sleep(seconds)
             for index in gpioNums:
-                Relays.gpioNumsStates[index] = not bool(mode) 
-        
+                Relays.gpioNumsStates[index] = not bool(mode)
+
     @staticmethod
     def state(numRelay):
         res = ""
         numRelays = Relays.getRealGpioNums([numRelay])
-        if len(relaysNum) > 0:
+        if len(numRelays) > 0:
             res = Relays.stateByGpioNum(numRelays[0])
         return res
 
@@ -33,11 +34,11 @@ class Relays:
         if not gpioNum in Relays.gpioNumsStates:
             raise ValueError("GPIO port " + gpioNum + " does not exist")
         return Relays.gpioNumsStates[gpioNum]
-        
+
     @staticmethod
     def getRealGpioNums(numRelays):
         realGpioNums = []
         for key, value in enumerate(Relays.configGpioNums):
-            if key+1 in numRelays:
+            if key + 1 in numRelays:
                 realGpioNums.insert(0, value)
         return realGpioNums
